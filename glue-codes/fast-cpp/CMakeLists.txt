@@ -23,6 +23,7 @@ find_package(ZLIB REQUIRED)
 find_package(HDF5 REQUIRED COMPONENTS C HL)
 find_package(YAMLCPP REQUIRED)
 
+message("HDF5_INCLUDES" ${HDF5_INCLUDE_DIR})
 include_directories(${YAML_INCLUDES})
 include_directories(${HDF5_INCLUDES})
 include_directories(${HDF5_INCLUDE_DIR})
@@ -74,7 +75,7 @@ install(TARGETS openfastcpplib
   LIBRARY DESTINATION lib)
 
 install(FILES
-  src/OpenFAST.H src/SC.h
+  src/OpenFAST.H src/SC.H
   DESTINATION include)
 
 install(TARGETS openfastcpp

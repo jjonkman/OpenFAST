@@ -40,6 +40,7 @@ option(USE_DLL_INTERFACE "Enable runtime loading of dynamic libraries" on)
 option(FPE_TRAP_ENABLED "Enable FPE trap in compiler options" off)
 option(ORCA_DLL_LOAD "Enable OrcaFlex Library Load" off)
 option(BUILD_FAST_CPP_API "Enable building FAST - C++ API" off)
+option(BUILD_FAST_FARM "Enable building FAST-Farm glue code" on)
 
 # Setup Fortran Compiler options based on architecture/compiler
 set_fast_fortran()
@@ -116,6 +117,13 @@ endforeach(IDIR IN ITEMS ${FAST_MODULES_LOCAL})
 foreach(IDIR IN ITEMS ${FAST_MODULES_EXTERNAL})
   add_subdirectory("${CMAKE_SOURCE_DIR}/modules-ext/${IDIR}")
 endforeach(IDIR IN ITEMS ${FAST_MODULES_EXTERNAL})
+
+if (BUILD_FAST_FARM)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/modules-local/wakedynamics")
+  add_subdirectory("${CMAKE_SOURCE_DIR}/modules-local/awae")
+  set_registry_includes("modules-local" wakedynamics)
+  set_registry_includes("modules-local" awae)
+endif()
 
 add_subdirectory(glue-codes)
 
