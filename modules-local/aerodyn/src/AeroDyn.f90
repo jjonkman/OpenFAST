@@ -259,7 +259,7 @@ subroutine AD_SetInitOut(p, InputFileData, InitOut, errStat, errMsg)
       CALL SetErrStat(ErrID_Fatal,"Error allocating memory for TwrElev.", ErrStat, ErrMsg, RoutineName)
       RETURN
    END IF
-   InitOut%TwrElev(:) = InputFileData%TwrElev(:)
+   InitOut%TwrElev(1:p%NumTwrNds) = InputFileData%TwrElev(1:p%NumTwrNds)
    
    IF ( p%NumTwrNds > 0 ) THEN
       ALLOCATE(InitOut%TwrDiam(p%NumTwrNds), STAT = ErrStat2)
@@ -267,7 +267,7 @@ subroutine AD_SetInitOut(p, InputFileData, InitOut, errStat, errMsg)
          CALL SetErrStat(ErrID_Fatal,"Error allocating memory for TwrDiam.", ErrStat, ErrMsg, RoutineName)
          RETURN
       END IF   
-      InitOut%TwrDiam(:) = p%TwrDiam(:)
+      InitOut%TwrDiam(1:p%NumTwrNds) = p%TwrDiam(1:p%NumTwrNds)
    END IF  
    
 end subroutine AD_SetInitOut
